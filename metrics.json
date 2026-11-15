@@ -1,0 +1,77 @@
+{
+  "cleaning": {
+    "original_rows": 7043,
+    "duplicate_rows": 0,
+    "duplicate_customer_ids": 0,
+    "missing_total_charges": 11
+  },
+  "rows_after_cleaning": 7043,
+  "train_rows": 5634,
+  "test_rows": 1409,
+  "historical_churn_rate": 0.2654,
+  "cv_comparison": {
+    "Logistic Regression": {
+      "recall": 0.8013,
+      "precision": 0.5169,
+      "f1": 0.6283
+    },
+    "Decision Tree": {
+      "recall": 0.7906,
+      "precision": 0.5003,
+      "f1": 0.6125
+    },
+    "Random Forest": {
+      "recall": 0.6408,
+      "precision": 0.5964,
+      "f1": 0.6176
+    }
+  },
+  "selected_model": "Logistic Regression",
+  "tuned_parameters": {
+    "model__C": 0.5
+  },
+  "grid_cv_recall": 0.8013,
+  "test_metrics": {
+    "recall": 0.7834,
+    "precision": 0.5034,
+    "f1": 0.613,
+    "accuracy": 0.7374
+  },
+  "confusion_matrix": [
+    [
+      746,
+      289
+    ],
+    [
+      81,
+      293
+    ]
+  ],
+  "classification_report": {
+    "Stayed": {
+      "precision": 0.9020556227327691,
+      "recall": 0.7207729468599033,
+      "f1-score": 0.8012889366272825,
+      "support": 1035.0
+    },
+    "Churned": {
+      "precision": 0.5034364261168385,
+      "recall": 0.7834224598930482,
+      "f1-score": 0.6129707112970711,
+      "support": 374.0
+    },
+    "accuracy": 0.7374024130589071,
+    "macro avg": {
+      "precision": 0.7027460244248038,
+      "recall": 0.7520977033764757,
+      "f1-score": 0.7071298239621768,
+      "support": 1409.0
+    },
+    "weighted avg": {
+      "precision": 0.7962475464131396,
+      "recall": 0.7374024130589071,
+      "f1-score": 0.7513024098185537,
+      "support": 1409.0
+    }
+  }
+}
