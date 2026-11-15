@@ -28,7 +28,7 @@ predictors.
 
 | Segment | Historical churn rate |
 |---|---:|
-| Month-to-mon contract | 42.7% |
+| Month-to-month contract | 42.7% |
 | Two-year contract | 2.8% |
 | Electronic check | 45.3% |
 | Automatic credit-card payment | 15.2% |
