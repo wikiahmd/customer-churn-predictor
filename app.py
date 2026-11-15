@@ -16,7 +16,7 @@ def load_model():
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv(ROOT / "telco-churn.csv")
+    df = pd.read_csv(ROOT / "telco_churn.csv")
     df["TotalCharges"] = pd.to_numeric(df["TotalCharges"], errors="coerce")
     df.loc[df.tenure.eq(0) & df.TotalCharges.isna(), "TotalCharges"] = 0.0
     return df
@@ -52,14 +52,14 @@ with predict_tab:
             internet = st.selectbox("Internet service", ["Fiber optic", "DSL", "No"])
             online_security = st.selectbox("Online security", ["No", "Yes", "No internet service"])
             online_backup = st.selectbox("Online backup", ["No", "Yes", "No internet service"])
-            device_protection = st.seelctbox('Device protection', ["No", "Yes", "No internet service"])
+            device_protection = st.selectbox('Device protection', ["No", "Yes", "No internet service"])
             tech_support = st.selectbox("Tech support", ["No", "Yes", "No interent service"])
         with col3:
             st.subheader("Usage and charges")
             streaming_tv = st.selectbox("Streaming TV", ["No", "Yes", "No internet service"])
             streaming_movies = st.selectbox("Streaming movies", ["No", "Yes", "No internet service"])
-            monthly = st.number_input("Monthly charges ($)", min_values=0.0, max_values=200.0, value=75.0, step=1.0)
-            total = st.number_input("Total charges to date ($)", min_values=0.0, value=750.0, step=10.0,
+            monthly = st.number_input("Monthly charges ($)", min_value=0.0, max_value=200.0, value=75.0, step=1.0)
+            total = st.number_input("Total charges to date ($)", min_value=0.0, value=750.0, step=10.0,
                                     help="Enter the real accumulated charges, not the monthly bill. For tenure 0, use 0.")
             st.info("Tip: Try changing the contract and tenure to see how the model's score changes. The score is not a causal effect.")
         submitted = st.form_submit_button("Calculate churn risk", type="primary", use_container_width=True)
@@ -83,14 +83,34 @@ with predict_tab:
             "Dependents": dependents, "tenure": tenure, "PhoneService": phone,
             "MultipleLines": multiple, "InternetService": internet,
             "OnlineSecurity": online_security, "OnlineBackup": online_backup,
+            "DeviceProtection": device_protection, "TechSupport": tech_support,
             "StreamingTV": streaming_tv, "StreamingMovies": streaming_movies,
-            "Contract": contract, "PaperlessBilling": paperless, "Paymentmethod": payment,
+            "Contract": contract, "PaperlessBilling": paperless, "PaymentMethod": payment,
             "MonthlyCharges": monthly, "TotalCharges": total,
         }
 
-        record = pd.DataFrame([customer])[list(model.feature_names_in_)]
-        score = float(model.predict_proba(record)[0, list(model.classes_).index(1)])
-        predicted_churn = bool(model.predict(record)[0])
+        if not hasattr(model, "feature_names_in"):
+            st.error(
+                "The saved model has no feature_names_in_. Check that you saved "
+                "the full fitted preprocessing + classification pipeline and "
+                "supply the exact feature order used at training."
+            )
+            st.stop()
+
+        feature_names = list(model.feature_names_in_)
+        missing = set(feature_names) - set(customer)
+        if missing:
+            st.error(f"The trained model expects features not provided by this app: {sorted(missing)}")
+            st.stop()
+
+        record = pd.DataFrame([customer])[feature_names]
+        classes = list(model.classes_)
+        churn_class = next((c for c in classes if c == 1 or c== "Yes"), None)
+        if churn_class is None:
+            st.error(f"Cannot identify the churn class in the model's classes_: {classes}")
+            st.stop()
+        score = float(model.predict_proba(record)[0, classes.index(churn_class)])
+        predicted_churn = score >= 0.50
         risk = "High" if score >= 0.65 else "Medium" if score >= 0.35 else "Low"
 
         st.divider()
@@ -116,12 +136,12 @@ with predict_tab:
         if not actions:
             actions.append("Maintain service quality and survey the customer before proposing a tailored incentive.")
         for action in actions:
-            st.write("*", action)
+            st.markdown(f"- {action}")
         st.caption("These actions are hypotheses based on group associations, not proven causes of churn. Test offers through experiments.")
 
 with insights_tab:
     df = load_data()
-    df["ChurnFlag"] = df.Churn.eq("Yes").astype(int)
+    df["ChurnFlag"] = df["Churn"].eq("Yes").astype(int)
     st.subheader("What does the historical dataset show?")
     n1, n2 = st.columns(2)
     n1.metric("Customers", f"{len(df):,}")
