@@ -91,14 +91,13 @@ customers.
 
 ```text
 Customer Churn Predictor/
-|-- aap.py
+|-- app.py
 |-- Churn_Project.ipynb
 |-- telco_churn.csv
 |-- train_model.py
 |-- model.joblib
 |-- metrics.json
 |-- requirements.txt
-|-- LEARNING_GUIDE.md
 |-- README.md
 ```
 
