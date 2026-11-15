@@ -92,7 +92,7 @@ customers.
 ```text
 Customer Churn Predictor/
 |-- app.py
-|-- Churn_Project.ipynb
+|-- Churn_Portfolio_Project_WiqarAhmed.ipynb
 |-- telco_churn.csv
 |-- train_model.py
 |-- model.joblib
