@@ -1,7 +1,9 @@
 # 📞 Telco Retention Lab - Customer Churn Predictor
 
-**Live Streamlit app:** 
+**Live Streamlit app:**
+
 **GitHub Link:** 
+
 **LinkedIn:** 
 
 A portfolio project from the PSEB Artificial Intelligence Bootcamp brief. Explore historical telecom customer churn, predict churn risk for a hypothetical customer and recommend retention experiments.
@@ -116,4 +118,5 @@ python -m streamlit runn app.py
 The saved model is already included. Rerunning `train_model.py` is useful to understand and reproduce how it was made. 
 
 **Dataset:** The Telco Customer Churn CSV supplied with the project brief (commonly shared as the IBM/Kaggle Telco Customer Churn dataset). 
+
 **Tools:** Python, pandas, seaborn, matplotlib, scikit-learn, joblib, Streamlit.
