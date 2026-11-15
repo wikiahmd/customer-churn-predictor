@@ -40,7 +40,7 @@ with predict_tab:
             dependents = st.selectbox("Has dependents", ["No", "Yes"])
             tenure = st.number_input("Tenure (months)", 0, 72, 10, 1)
             st.subheader("Contract")
-            contract = st.selectbox("Contract", "Month-to-month", "One year", "Two year")
+            contract = st.selectbox("Contract", ["Month-to-month", "One year", "Two year"])
             paperless = st.selectbox("Paperless billing", ["Yes", "No"])
             payment = st.selectbox("Payment method", [
                 "Electronic check", "Mailed check", "Bank transfer (automatic)", "Credit card (automatic)"
@@ -74,7 +74,16 @@ with predict_tab:
             internet_dependent = ["No internet service"] * 6
         else:
             internet_dependent = ["No" if value == "No internet service" else value for value in internet_dependent]
-        online_security, online_backup, device_protection, tech_support, streaming_tv, streaming_movies = internet_dependent
+
+        (
+            online_security, 
+            online_backup, 
+            device_protection,
+            tech_support, 
+            streaming_tv, 
+            streaming_movies
+            ) = internet_dependent
+        
         if tenure == 0:
             total = 0.0
 
