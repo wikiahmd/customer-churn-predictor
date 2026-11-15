@@ -5,7 +5,7 @@ from pathlib import Path
 
 import joblib
 import pandas as pd
-import steamlit as st
+import streamlit as st
 
 ROOT = Path(__file__).resolve().parent
 st.set_page_config(page_title="Telco Retention Lab", page_icon="📞", layout="wide")
