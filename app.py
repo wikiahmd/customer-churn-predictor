@@ -98,14 +98,6 @@ with predict_tab:
             "MonthlyCharges": monthly, "TotalCharges": total,
         }
 
-        if not hasattr(model, "feature_names_in"):
-            st.error(
-                "The saved model has no feature_names_in_. Check that you saved "
-                "the full fitted preprocessing + classification pipeline and "
-                "supply the exact feature order used at training."
-            )
-            st.stop()
-
         feature_names = list(model.feature_names_in_)
         missing = set(feature_names) - set(customer)
         if missing:
