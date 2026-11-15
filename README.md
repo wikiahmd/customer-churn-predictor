@@ -111,7 +111,7 @@ python -m venv .venv
 # macOS/Linux: source .venv/bin/activate
 python -m pip install -r requirements.txt
 python train_model.py
-python -m streamlit runn app.py
+python -m streamlit run app.py
 ```
 
 The saved model is already included. Rerunning `train_model.py` is useful to understand and reproduce how it was made. 
