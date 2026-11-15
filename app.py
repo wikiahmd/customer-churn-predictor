@@ -158,7 +158,7 @@ with insights_tab:
     left, right = st.columns(2)
     with left:
         st.write("**Churn rate by contract**")
-        st.bar_chart((df.groupby("Contract")["ChurnFlag"].mean() * 100).rename("Churn %"), y_labels="Churn (%)")
+        st.bar_chart((df.groupby("Contract")["ChurnFlag"].mean() * 100).rename("Churn %"), y_label="Churn (%)")
         st.write("**Churn rate by payment method**")
         st.bar_chart((df.groupby("PaymentMethod")["ChurnFlag"].mean() * 100).rename("Churn %"), y_label="Churn (%)")
     with right:
