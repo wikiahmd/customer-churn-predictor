@@ -1,10 +1,10 @@
 # 📞 Telco Retention Lab - Customer Churn Predictor
 
-**Live Streamlit app:**
+**Live Streamlit app:** https://customer-churn-predictor-d2oszeyb37flhryzf88kqd.streamlit.app/
 
-**GitHub Link:** 
+**GitHub Link:** https://github.com/wikiahmd/customer-churn-predictor
 
-**LinkedIn:** 
+**LinkedIn Post:** https://www.linkedin.com/feed/update/urn:li:activity:7528378490317086722/
 
 A portfolio project from the PSEB Artificial Intelligence Bootcamp brief. Explore historical telecom customer churn, predict churn risk for a hypothetical customer and recommend retention experiments.
 
